@@ -27,6 +27,13 @@ interface CenterCardProps {
 }
 
 const CenterCard = ({ center, validations, selectedUser, onValidate }: CenterCardProps) => {
+  // Track the most recent validation change
+  const [recentValidation, setRecentValidation] = useState<{
+    user: 'francisco' | 'pascal';
+    type: 'information' | 'contact';
+    action: 'validated' | 'unvalidated';
+  } | null>(null);
+  
   // Check if center is validated by each user
   const isInformationValidatedBy = (userId: 'francisco' | 'pascal') => {
     return validations.some(v => 
@@ -53,12 +60,22 @@ const CenterCard = ({ center, validations, selectedUser, onValidate }: CenterCar
   const handleInformationChange = (checked: boolean) => {
     if (selectedUser) {
       onValidate(center.id, 'information', checked);
+      setRecentValidation({
+        user: selectedUser,
+        type: 'information',
+        action: checked ? 'validated' : 'unvalidated'
+      });
     }
   };
   
   const handleContactChange = (checked: boolean) => {
     if (selectedUser) {
       onValidate(center.id, 'contact', checked);
+      setRecentValidation({
+        user: selectedUser,
+        type: 'contact',
+        action: checked ? 'validated' : 'unvalidated'
+      });
     }
   };
 
@@ -69,6 +86,11 @@ const CenterCard = ({ center, validations, selectedUser, onValidate }: CenterCar
   const isCheckedContact = selectedUser ? 
     (selectedUser === 'francisco' ? contactValidatedByFrancisco : contactValidatedByPascal) :
     false;
+
+  // Find user object from the selected user
+  const getUser = (userId: 'francisco' | 'pascal') => {
+    return users.find(user => user.id === userId) || users[0];
+  };
 
   return (
     <Card id={center.id} className="w-full">
@@ -83,6 +105,7 @@ const CenterCard = ({ center, validations, selectedUser, onValidate }: CenterCar
           </div>
         </div>
       </CardHeader>
+      
       <CardContent className="space-y-4">
         {center.director && (
           <div className="flex items-start gap-2">
@@ -128,6 +151,7 @@ const CenterCard = ({ center, validations, selectedUser, onValidate }: CenterCar
           </div>
         )}
       </CardContent>
+      
       <CardFooter className="flex flex-col gap-4 border-t pt-4">
         <div className="w-full flex flex-col gap-4">
           <div className="flex items-center justify-between">
@@ -226,6 +250,32 @@ const CenterCard = ({ center, validations, selectedUser, onValidate }: CenterCar
             </div>
           </div>
         </div>
+        
+        {/* Recent validation activity display */}
+        {recentValidation && (
+          <div className="mt-4 border-t pt-4 w-full">
+            <div className="flex items-center gap-2 bg-muted/50 p-3 rounded-md">
+              <Avatar className="h-8 w-8">
+                <AvatarImage 
+                  src={getUser(recentValidation.user).avatar} 
+                  alt={getUser(recentValidation.user).name} 
+                />
+                <AvatarFallback>
+                  {recentValidation.user === "francisco" ? "FB" : "PK"}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <p className="text-sm">
+                  <span className="font-medium">{getUser(recentValidation.user).name}</span> {recentValidation.action === 'validated' ? 'validated' : 'removed validation for'} {' '}
+                  <span className="font-medium">
+                    {recentValidation.type === 'information' ? 'Center Information' : 'Director Contact'}
+                  </span>
+                </p>
+                <p className="text-xs text-muted-foreground">Just now</p>
+              </div>
+            </div>
+          </div>
+        )}
       </CardFooter>
     </Card>
   );
