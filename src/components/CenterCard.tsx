@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { users } from '@/data/users';
 import { MapPin, Globe, Phone, Mail, User, Check } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
 
 interface CenterCardProps {
   center: Center;
@@ -56,27 +57,69 @@ const CenterCard = ({ center, validations, selectedUser, onValidate }: CenterCar
   const contactValidatedByFrancisco = isContactValidatedBy('francisco');
   const contactValidatedByPascal = isContactValidatedBy('pascal');
   
-  // Handle checkbox changes
+  // Handle checkbox changes with user validation check
   const handleInformationChange = (checked: boolean) => {
-    if (selectedUser) {
-      onValidate(center.id, 'information', checked);
-      setRecentValidation({
-        user: selectedUser,
-        type: 'information',
-        action: checked ? 'validated' : 'unvalidated'
+    if (!selectedUser) {
+      toast({
+        title: "Select a user",
+        description: "Please select who you are before validating",
+        variant: "destructive"
       });
+      return;
     }
+
+    // If trying to uncheck, verify that the current user is the one who validated
+    if (!checked && selectedUser) {
+      // If the checkbox was validated by someone else
+      if ((selectedUser === 'francisco' && !informationValidatedByFrancisco && informationValidatedByPascal) || 
+          (selectedUser === 'pascal' && !informationValidatedByPascal && informationValidatedByFrancisco)) {
+        toast({
+          title: "Unauthorized action",
+          description: `Only the user who validated can revoke this validation`,
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+
+    onValidate(center.id, 'information', checked);
+    setRecentValidation({
+      user: selectedUser,
+      type: 'information',
+      action: checked ? 'validated' : 'unvalidated'
+    });
   };
   
   const handleContactChange = (checked: boolean) => {
-    if (selectedUser) {
-      onValidate(center.id, 'contact', checked);
-      setRecentValidation({
-        user: selectedUser,
-        type: 'contact',
-        action: checked ? 'validated' : 'unvalidated'
+    if (!selectedUser) {
+      toast({
+        title: "Select a user",
+        description: "Please select who you are before validating",
+        variant: "destructive"
       });
+      return;
     }
+
+    // If trying to uncheck, verify that the current user is the one who validated
+    if (!checked && selectedUser) {
+      // If the checkbox was validated by someone else
+      if ((selectedUser === 'francisco' && !contactValidatedByFrancisco && contactValidatedByPascal) || 
+          (selectedUser === 'pascal' && !contactValidatedByPascal && contactValidatedByFrancisco)) {
+        toast({
+          title: "Unauthorized action",
+          description: `Only the user who validated can revoke this validation`,
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+
+    onValidate(center.id, 'contact', checked);
+    setRecentValidation({
+      user: selectedUser,
+      type: 'contact',
+      action: checked ? 'validated' : 'unvalidated'
+    });
   };
 
   const isCheckedInformation = selectedUser ? 

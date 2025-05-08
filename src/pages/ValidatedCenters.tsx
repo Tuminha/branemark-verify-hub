@@ -1,16 +1,33 @@
 
+import { useState, useEffect } from 'react';
 import { centers } from '@/data/centers';
 import { useValidations } from '@/data/validations';
 import CentersList from '@/components/CentersList';
-import { useState } from 'react';
 import UserSelector from '@/components/UserSelector';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
 
 const ValidatedCenters = () => {
-  const [selectedUser, setSelectedUser] = useState<'francisco' | 'pascal' | null>(null);
+  // Load selected user from localStorage
+  const getSavedUser = (): 'francisco' | 'pascal' | null => {
+    const saved = localStorage.getItem('branemark-selected-user');
+    if (saved === 'francisco' || saved === 'pascal') {
+      return saved;
+    }
+    return null;
+  };
+
+  const [selectedUser, setSelectedUser] = useState<'francisco' | 'pascal' | null>(getSavedUser);
   const { validations, addValidation, removeValidation } = useValidations();
+
+  // Save selected user to localStorage
+  useEffect(() => {
+    if (selectedUser) {
+      localStorage.setItem('branemark-selected-user', selectedUser);
+    }
+  }, [selectedUser]);
 
   // Filter centers to only show those with information validated by at least one user
   const validatedCenters = centers.filter(center => {
@@ -20,13 +37,36 @@ const ValidatedCenters = () => {
   });
 
   const handleValidate = (centerId: string, validationType: 'information' | 'contact', isValid: boolean) => {
-    if (!selectedUser) return;
+    if (!selectedUser) {
+      toast({
+        title: "Select a user",
+        description: "Please select who you are before validating",
+        variant: "destructive"
+      });
+      return;
+    }
     
     if (isValid) {
       addValidation(centerId, validationType, selectedUser);
+      toast({
+        title: "Center Validated",
+        description: `${validationType === 'information' ? 'Information' : 'Contact'} has been validated by ${selectedUser === 'francisco' ? 'Francisco' : 'Pascal'}.`,
+      });
     } else {
       removeValidation(centerId, validationType, selectedUser);
+      toast({
+        title: "Validation Removed",
+        description: `${validationType === 'information' ? 'Information' : 'Contact'} validation has been removed.`,
+      });
     }
+  };
+
+  const selectUser = (userId: 'francisco' | 'pascal') => {
+    setSelectedUser(userId);
+    toast({
+      title: "User Changed",
+      description: `Now validating as ${userId === 'francisco' ? 'Francisco Barbosa' : 'Pascal Kunz'}.`,
+    });
   };
 
   return (
@@ -45,7 +85,7 @@ const ValidatedCenters = () => {
         </p>
       </div>
 
-      <UserSelector onSelectUser={setSelectedUser} selectedUser={selectedUser} />
+      <UserSelector onSelectUser={selectUser} selectedUser={selectedUser} />
 
       {validatedCenters.length > 0 ? (
         <CentersList 

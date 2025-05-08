@@ -1,10 +1,9 @@
 
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState, useEffect } from 'react';
 import { useValidations } from '@/data/validations';
 import { centers } from '@/data/centers';
 import { useFilters } from '@/hooks/useFilters';
-import { Validation } from '@/types';
-import WorldMap from '@/components/WorldMap';
+import { WorldMap } from '@/components/WorldMap';
 import FilterBar from '@/components/FilterBar';
 import CentersList from '@/components/CentersList';
 import UserSelector from '@/components/UserSelector';
@@ -12,12 +11,28 @@ import StatsSummary from '@/components/StatsSummary';
 import { toast } from '@/hooks/use-toast';
 
 const Dashboard = () => {
-  const [selectedUser, setSelectedUser] = useState<'francisco' | 'pascal' | null>(null);
-  const { validations, addValidation, removeValidation, isValidated } = useValidations();
+  // Load selected user from localStorage
+  const getSavedUser = (): 'francisco' | 'pascal' | null => {
+    const saved = localStorage.getItem('branemark-selected-user');
+    if (saved === 'francisco' || saved === 'pascal') {
+      return saved;
+    }
+    return null;
+  };
+
+  const [selectedUser, setSelectedUser] = useState<'francisco' | 'pascal' | null>(getSavedUser);
+  const { validations, addValidation, removeValidation } = useValidations();
   const { filters, setFilters, filteredCenters, uniqueContinents, uniqueCountries } = useFilters(centers, validations);
   
   // Reference for scrolling to a center card
   const centerRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  // Save selected user to localStorage
+  useEffect(() => {
+    if (selectedUser) {
+      localStorage.setItem('branemark-selected-user', selectedUser);
+    }
+  }, [selectedUser]);
 
   const handleValidate = useCallback((centerId: string, validationType: 'information' | 'contact', isValid: boolean) => {
     if (!selectedUser) return;

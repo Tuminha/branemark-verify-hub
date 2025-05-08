@@ -1,12 +1,31 @@
 
 import { Validation } from '../types';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
-// Initial state will be empty, as no validations exist at the start
-const initialValidations: Validation[] = [];
+// Function to load validations from localStorage
+const loadValidationsFromStorage = (): Validation[] => {
+  const stored = localStorage.getItem('branemark-validations');
+  if (stored) {
+    try {
+      return JSON.parse(stored);
+    } catch (e) {
+      console.error('Failed to parse stored validations:', e);
+      return [];
+    }
+  }
+  return [];
+};
+
+// Initial state will be from localStorage or empty if none exists
+const initialValidations: Validation[] = loadValidationsFromStorage();
 
 export const useValidations = () => {
   const [validations, setValidations] = useState<Validation[]>(initialValidations);
+
+  // Save validations to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('branemark-validations', JSON.stringify(validations));
+  }, [validations]);
 
   const addValidation = useCallback((centerId: string, validationType: 'information' | 'contact', validatedBy: 'francisco' | 'pascal') => {
     const newValidation: Validation = {
