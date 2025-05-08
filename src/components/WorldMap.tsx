@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { Center } from '@/types';
 import { Card } from '@/components/ui/card';
