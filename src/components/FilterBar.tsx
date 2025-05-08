@@ -45,7 +45,7 @@ const FilterBar = ({ filters, onFilterChange, uniqueContinents, uniqueCountries 
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Select
-            value={filters.continent || ""}
+            value={filters.continent || undefined}
             onValueChange={(value) => handleFilterChange('continent', value || null)}
           >
             <SelectTrigger>
@@ -53,7 +53,7 @@ const FilterBar = ({ filters, onFilterChange, uniqueContinents, uniqueCountries 
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="">All Continents</SelectItem>
+                <SelectItem value="all">All Continents</SelectItem>
                 {uniqueContinents.map(continent => (
                   <SelectItem key={continent} value={continent}>{continent}</SelectItem>
                 ))}
@@ -62,7 +62,7 @@ const FilterBar = ({ filters, onFilterChange, uniqueContinents, uniqueCountries 
           </Select>
 
           <Select
-            value={filters.country || ""}
+            value={filters.country || undefined}
             onValueChange={(value) => handleFilterChange('country', value || null)}
           >
             <SelectTrigger>
@@ -70,7 +70,7 @@ const FilterBar = ({ filters, onFilterChange, uniqueContinents, uniqueCountries 
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="">All Countries</SelectItem>
+                <SelectItem value="all">All Countries</SelectItem>
                 {uniqueCountries.map(country => (
                   <SelectItem key={country} value={country}>{country}</SelectItem>
                 ))}
@@ -79,7 +79,7 @@ const FilterBar = ({ filters, onFilterChange, uniqueContinents, uniqueCountries 
           </Select>
 
           <Select
-            value={filters.validatedBy || ""}
+            value={filters.validatedBy || undefined}
             onValueChange={(value) => handleFilterChange('validatedBy', value as any || null)}
           >
             <SelectTrigger>
@@ -87,7 +87,7 @@ const FilterBar = ({ filters, onFilterChange, uniqueContinents, uniqueCountries 
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="">All Validations</SelectItem>
+                <SelectItem value="all">All Validations</SelectItem>
                 <SelectItem value="francisco">Validated by Francisco</SelectItem>
                 <SelectItem value="pascal">Validated by Pascal</SelectItem>
                 <SelectItem value="both">Validated by Both</SelectItem>
@@ -97,7 +97,7 @@ const FilterBar = ({ filters, onFilterChange, uniqueContinents, uniqueCountries 
           </Select>
 
           <Select
-            value={filters.validationType || ""}
+            value={filters.validationType || undefined}
             onValueChange={(value) => handleFilterChange('validationType', value as any || null)}
           >
             <SelectTrigger>
@@ -105,7 +105,7 @@ const FilterBar = ({ filters, onFilterChange, uniqueContinents, uniqueCountries 
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="">All Types</SelectItem>
+                <SelectItem value="all">All Types</SelectItem>
                 <SelectItem value="information">Information Validation</SelectItem>
                 <SelectItem value="contact">Contact Validation</SelectItem>
               </SelectGroup>
