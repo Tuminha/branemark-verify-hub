@@ -14,7 +14,7 @@ const WorldMap = ({ centers, onCenterSelect }: WorldMapProps) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const leafletMapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
-
+  
   useEffect(() => {
     // Only import and initialize Leaflet on the client-side
     if (typeof window !== 'undefined' && mapRef.current && !mapLoaded) {
@@ -25,6 +25,14 @@ const WorldMap = ({ centers, onCenterSelect }: WorldMapProps) => {
         if (leafletMapRef.current) {
           leafletMapRef.current.remove();
         }
+
+        // Fix Leaflet's default icon path issues
+        delete L.Icon.Default.prototype._getIconUrl;
+        L.Icon.Default.mergeOptions({
+          iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+          iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+          shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+        });
 
         // Initialize the map
         const map = L.map(mapRef.current, {
@@ -55,11 +63,22 @@ const WorldMap = ({ centers, onCenterSelect }: WorldMapProps) => {
       markersRef.current.forEach(marker => marker.remove());
       markersRef.current = [];
       
+      // Create a custom icon for the markers
+      const customIcon = L.icon({
+        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+      
       centers.forEach(center => {
         const { lat, lng } = center.coordinates;
         
-        // Create marker
-        const marker = L.marker([lat, lng]).addTo(leafletMapRef.current);
+        // Create marker with custom icon
+        const marker = L.marker([lat, lng], { icon: customIcon }).addTo(leafletMapRef.current);
         
         // Add popup with center info
         marker.bindPopup(`

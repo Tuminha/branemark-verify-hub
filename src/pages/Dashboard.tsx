@@ -3,7 +3,7 @@ import { useCallback, useRef, useState, useEffect } from 'react';
 import { useValidations } from '@/data/validations';
 import { centers } from '@/data/centers';
 import { useFilters } from '@/hooks/useFilters';
-import { WorldMap } from '@/components/WorldMap';
+import WorldMap from '@/components/WorldMap';
 import FilterBar from '@/components/FilterBar';
 import CentersList from '@/components/CentersList';
 import UserSelector from '@/components/UserSelector';
