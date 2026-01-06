@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import {
   Search,
-  Filter,
   Globe2,
   Building2,
   Users,
@@ -14,7 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Select,
   SelectContent,
@@ -124,21 +123,21 @@ export const IntelligenceDashboard = () => {
     <div className="min-h-screen bg-slate-950">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-lg border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-                <Globe2 className="w-8 h-8 text-blue-400" />
-                Brånemark Intelligence Hub
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="min-w-0">
+              <h1 className="text-lg sm:text-2xl font-bold text-white flex items-center gap-2 sm:gap-3">
+                <Globe2 className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400 flex-shrink-0" />
+                <span className="truncate">Brånemark Intelligence Hub</span>
               </h1>
-              <p className="text-sm text-slate-400 mt-1">
-                Confidential Report for Nobel Biocare | Prepared by F4R Foundation
+              <p className="text-xs sm:text-sm text-slate-400 mt-1 truncate">
+                Confidential Report for Nobel Biocare | F4R Foundation
               </p>
             </div>
 
             {/* Credits Section */}
-            <div className="flex items-center gap-6">
-              <div className="hidden md:flex items-center gap-4">
+            <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-6">
+              <div className="hidden lg:flex items-center gap-4">
                 <span className="text-xs text-slate-500">Work done by</span>
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-2">
@@ -160,13 +159,28 @@ export const IntelligenceDashboard = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <Badge variant="outline" className="border-slate-600 text-slate-400 hidden sm:flex">
-                  Last Updated: January 2025
+              {/* Mobile avatars only */}
+              <div className="flex lg:hidden items-center gap-2">
+                <span className="text-xs text-slate-500">By</span>
+                <img
+                  src="/branemark-verify-hub/lovable-uploads/6b459952-000c-4291-b004-b1b9d74cfc7b.png"
+                  alt="Francisco Barbosa"
+                  className="w-6 h-6 rounded-full border border-blue-500"
+                />
+                <img
+                  src="/branemark-verify-hub/lovable-uploads/911c3a90-0053-449c-95a9-d38672ab6cdd.png"
+                  alt="Pascal Kunz"
+                  className="w-6 h-6 rounded-full border border-purple-500"
+                />
+              </div>
+
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Badge variant="outline" className="border-slate-600 text-slate-400 hidden md:flex text-xs">
+                  Jan 2025
                 </Badge>
-                <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 hover:bg-slate-800">
-                  <Download className="w-4 h-4 mr-2" />
-                  Export
+                <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 hover:bg-slate-800 text-xs sm:text-sm px-2 sm:px-3">
+                  <Download className="w-3 h-3 sm:w-4 sm:h-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Export</span>
                 </Button>
               </div>
             </div>
@@ -174,77 +188,77 @@ export const IntelligenceDashboard = () => {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-6 space-y-6">
+      <main className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-4 sm:space-y-6">
         {/* Statistics Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
           <Card className="bg-slate-900/80 border-slate-700">
-            <CardContent className="pt-4">
+            <CardContent className="p-3 sm:pt-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-slate-400">Total Centers</p>
-                  <p className="text-2xl font-bold text-white">{stats.total}</p>
+                  <p className="text-[10px] sm:text-xs text-slate-400">Centers</p>
+                  <p className="text-lg sm:text-2xl font-bold text-white">{stats.total}</p>
                 </div>
-                <Building2 className="w-8 h-8 text-blue-400" />
+                <Building2 className="w-5 h-5 sm:w-8 sm:h-8 text-blue-400" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-slate-900/80 border-slate-700">
-            <CardContent className="pt-4">
+            <CardContent className="p-3 sm:pt-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-slate-400">Countries</p>
-                  <p className="text-2xl font-bold text-white">{stats.countries}</p>
+                  <p className="text-[10px] sm:text-xs text-slate-400">Countries</p>
+                  <p className="text-lg sm:text-2xl font-bold text-white">{stats.countries}</p>
                 </div>
-                <Globe2 className="w-8 h-8 text-purple-400" />
+                <Globe2 className="w-5 h-5 sm:w-8 sm:h-8 text-purple-400" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-slate-900/80 border-slate-700">
-            <CardContent className="pt-4">
+            <CardContent className="p-3 sm:pt-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-slate-400">Nobel Partners</p>
-                  <p className="text-2xl font-bold text-green-400">{stats.nobelPartners}</p>
+                  <p className="text-[10px] sm:text-xs text-slate-400">Partners</p>
+                  <p className="text-lg sm:text-2xl font-bold text-green-400">{stats.nobelPartners}</p>
                 </div>
-                <TrendingUp className="w-8 h-8 text-green-400" />
+                <TrendingUp className="w-5 h-5 sm:w-8 sm:h-8 text-green-400" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-slate-900/80 border-slate-700">
-            <CardContent className="pt-4">
+            <CardContent className="p-3 sm:pt-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-slate-400">Competitors</p>
-                  <p className="text-2xl font-bold text-red-400">{stats.competitors}</p>
+                  <p className="text-[10px] sm:text-xs text-slate-400">Competitors</p>
+                  <p className="text-lg sm:text-2xl font-bold text-red-400">{stats.competitors}</p>
                 </div>
-                <AlertTriangle className="w-8 h-8 text-red-400" />
+                <AlertTriangle className="w-5 h-5 sm:w-8 sm:h-8 text-red-400" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-slate-900/80 border-slate-700">
-            <CardContent className="pt-4">
+            <CardContent className="p-3 sm:pt-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-slate-400">FOR.org Linked</p>
-                  <p className="text-2xl font-bold text-blue-400">{stats.forConnections}</p>
+                  <p className="text-[10px] sm:text-xs text-slate-400">FOR.org</p>
+                  <p className="text-lg sm:text-2xl font-bold text-blue-400">{stats.forConnections}</p>
                 </div>
-                <Users className="w-8 h-8 text-blue-400" />
+                <Users className="w-5 h-5 sm:w-8 sm:h-8 text-blue-400" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-slate-900/80 border-slate-700">
-            <CardContent className="pt-4">
+            <CardContent className="p-3 sm:pt-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-slate-400">Data Confirmed</p>
-                  <p className="text-2xl font-bold text-emerald-400">{Math.round((stats.confirmed / stats.total) * 100)}%</p>
+                  <p className="text-[10px] sm:text-xs text-slate-400">Confirmed</p>
+                  <p className="text-lg sm:text-2xl font-bold text-emerald-400">{Math.round((stats.confirmed / stats.total) * 100)}%</p>
                 </div>
-                <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+                <CheckCircle2 className="w-5 h-5 sm:w-8 sm:h-8 text-emerald-400" />
               </div>
             </CardContent>
           </Card>
@@ -259,21 +273,21 @@ export const IntelligenceDashboard = () => {
 
         {/* Filters */}
         <Card className="bg-slate-900/80 border-slate-700">
-          <CardContent className="py-4">
-            <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
-              <div className="flex-1 relative">
+          <CardContent className="p-3 sm:py-4">
+            <div className="flex flex-col gap-3">
+              <div className="relative w-full">
                 <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 <Input
-                  placeholder="Search centers, directors, locations..."
+                  placeholder="Search centers, directors..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 bg-slate-800 border-slate-600 text-white placeholder:text-slate-500"
+                  className="pl-10 bg-slate-800 border-slate-600 text-white placeholder:text-slate-500 text-sm"
                 />
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2">
                 <Select value={continentFilter} onValueChange={setContinentFilter}>
-                  <SelectTrigger className="w-[160px] bg-slate-800 border-slate-600 text-white">
+                  <SelectTrigger className="w-full sm:w-[140px] bg-slate-800 border-slate-600 text-white text-sm">
                     <SelectValue placeholder="Continent" />
                   </SelectTrigger>
                   <SelectContent className="bg-slate-800 border-slate-600">
@@ -285,8 +299,8 @@ export const IntelligenceDashboard = () => {
                 </Select>
 
                 <Select value={nobelFilter} onValueChange={setNobelFilter}>
-                  <SelectTrigger className="w-[180px] bg-slate-800 border-slate-600 text-white">
-                    <SelectValue placeholder="Nobel Relationship" />
+                  <SelectTrigger className="w-full sm:w-[150px] bg-slate-800 border-slate-600 text-white text-sm">
+                    <SelectValue placeholder="Relationship" />
                   </SelectTrigger>
                   <SelectContent className="bg-slate-800 border-slate-600">
                     <SelectItem value="all">All Relationships</SelectItem>
@@ -301,23 +315,23 @@ export const IntelligenceDashboard = () => {
                     variant="ghost"
                     size="sm"
                     onClick={clearFilters}
-                    className="text-slate-400 hover:text-white"
+                    className="text-slate-400 hover:text-white text-xs"
                   >
-                    <X className="w-4 h-4 mr-1" />
+                    <X className="w-3 h-3 mr-1" />
                     Clear
                   </Button>
                 )}
               </div>
             </div>
 
-            <div className="mt-3 text-sm text-slate-400">
+            <div className="mt-3 text-xs sm:text-sm text-slate-400">
               Showing {filteredCenters.length} of {centersIntelligence.length} centers
             </div>
           </CardContent>
         </Card>
 
         {/* Centers Grid */}
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           {filteredCenters.map(center => (
             <div key={center.id} id={`center-${center.id}`}>
               <CenterIntelligenceCard
@@ -340,17 +354,17 @@ export const IntelligenceDashboard = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-800 mt-12">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+      <footer className="bg-slate-900 border-t border-slate-800 mt-8 sm:mt-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+          <div className="flex flex-col items-center gap-2 text-xs sm:text-sm text-slate-400 text-center">
             <div>
               <span className="text-white font-medium">F4R Foundation</span> for Oral Rehabilitation
             </div>
-            <div>
+            <div className="hidden sm:block">
               Prepared for Nobel Biocare | Confidential Business Intelligence
             </div>
-            <div className="flex items-center gap-2">
-              <span>Research conducted: January 2025</span>
+            <div>
+              Research: January 2025
             </div>
           </div>
         </div>

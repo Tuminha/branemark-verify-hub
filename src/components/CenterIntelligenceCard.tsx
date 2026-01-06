@@ -86,28 +86,28 @@ export const CenterIntelligenceCard = ({ center, isExpanded = false, onToggleExp
 
   return (
     <Card className="bg-slate-900/80 border-slate-700 hover:border-slate-600 transition-all duration-300">
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-4">
+      <CardHeader className="pb-3 px-3 sm:px-6 pt-4 sm:pt-6">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1">
-              <CardTitle className="text-lg font-semibold text-white truncate">
+              <CardTitle className="text-base sm:text-lg font-semibold text-white">
                 {center.name}
               </CardTitle>
-              <Badge className={`${nobelBadge.color} text-white text-xs`}>
+              <Badge className={`${nobelBadge.color} text-white text-[10px] sm:text-xs`}>
                 {nobelBadge.label}
               </Badge>
             </div>
-            <div className="flex items-center gap-2 text-slate-400 text-sm">
-              <MapPin className="w-4 h-4 flex-shrink-0" />
-              <span>{center.location}</span>
-              <span className="text-slate-600">|</span>
-              <span className="text-slate-500">{center.continent}</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 text-slate-400 text-xs sm:text-sm flex-wrap">
+              <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="truncate">{center.location}</span>
+              <span className="text-slate-600 hidden sm:inline">|</span>
+              <span className="text-slate-500 hidden sm:inline">{center.continent}</span>
             </div>
           </div>
 
           {/* Overall confidence indicator */}
-          <div className="flex flex-col items-end gap-1">
-            <Badge variant="outline" className={`
+          <div className="flex sm:flex-col items-center sm:items-end gap-2 sm:gap-1 mt-1 sm:mt-0">
+            <Badge variant="outline" className={`text-[10px] sm:text-xs
               ${center.overallConfidence === 'confirmed' ? 'border-green-500 text-green-400' : ''}
               ${center.overallConfidence === 'likely' ? 'border-blue-500 text-blue-400' : ''}
               ${center.overallConfidence === 'unconfirmed' ? 'border-yellow-500 text-yellow-400' : ''}
@@ -115,7 +115,7 @@ export const CenterIntelligenceCard = ({ center, isExpanded = false, onToggleExp
             `}>
               {getConfidenceLabel(center.overallConfidence)}
             </Badge>
-            <span className="text-xs text-slate-500">Updated: {center.lastResearched}</span>
+            <span className="text-[10px] sm:text-xs text-slate-500">Updated: {center.lastResearched}</span>
           </div>
         </div>
 
@@ -142,18 +142,18 @@ export const CenterIntelligenceCard = ({ center, isExpanded = false, onToggleExp
         )}
       </CardHeader>
 
-      <CardContent className="pt-0">
+      <CardContent className="pt-0 px-3 sm:px-6 pb-4 sm:pb-6">
         {/* Director Section */}
         {center.director && (
-          <div className="mb-4 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
-            <div className="flex items-center gap-2 mb-2">
-              <User className="w-4 h-4 text-blue-400" />
-              <span className="text-sm font-medium text-white">
+          <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-slate-800/50 rounded-lg border border-slate-700">
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-2 flex-wrap">
+              <User className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" />
+              <span className="text-xs sm:text-sm font-medium text-white">
                 {center.director.name.value}
               </span>
               <ConfidenceBadge confidence={center.director.name.confidence} />
               {center.director.forConnection && (
-                <Badge className="bg-blue-600/20 text-blue-400 border-blue-500/30 text-xs">
+                <Badge className="bg-blue-600/20 text-blue-400 border-blue-500/30 text-[10px] sm:text-xs">
                   FOR.org
                 </Badge>
               )}
@@ -191,10 +191,10 @@ export const CenterIntelligenceCard = ({ center, isExpanded = false, onToggleExp
 
         {/* Implant Brands (Critical Intelligence) */}
         {center.implantBrands && center.implantBrands.length > 0 && (
-          <div className="mb-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Briefcase className="w-4 h-4 text-purple-400" />
-              <span className="text-sm font-medium text-white">Implant Brands</span>
+          <div className="mb-3 sm:mb-4">
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-2">
+              <Briefcase className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
+              <span className="text-xs sm:text-sm font-medium text-white">Implant Brands</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {center.implantBrands.map((brand, idx) => (
@@ -224,23 +224,23 @@ export const CenterIntelligenceCard = ({ center, isExpanded = false, onToggleExp
 
         {/* Nobel Biocare Opportunity */}
         {center.nobelBiocareOpportunity && (
-          <div className="mb-4 p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
-            <div className="flex items-center gap-2 mb-1">
-              <Target className="w-4 h-4 text-purple-400" />
-              <span className="text-sm font-medium text-purple-300">Opportunity for Nobel Biocare</span>
+          <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-1">
+              <Target className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
+              <span className="text-xs sm:text-sm font-medium text-purple-300">Opportunity for Nobel Biocare</span>
             </div>
-            <p className="text-xs text-purple-200/80">{center.nobelBiocareOpportunity}</p>
+            <p className="text-[11px] sm:text-xs text-purple-200/80">{center.nobelBiocareOpportunity}</p>
           </div>
         )}
 
         {/* Competitive Notes */}
         {center.competitiveNotes && (
-          <div className="mb-4 p-3 bg-amber-900/20 rounded-lg border border-amber-500/30">
-            <div className="flex items-center gap-2 mb-1">
-              <AlertTriangle className="w-4 h-4 text-amber-400" />
-              <span className="text-sm font-medium text-amber-300">Competitive Intelligence</span>
+          <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-amber-900/20 rounded-lg border border-amber-500/30">
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-1">
+              <AlertTriangle className="w-3 h-3 sm:w-4 sm:h-4 text-amber-400" />
+              <span className="text-xs sm:text-sm font-medium text-amber-300">Competitive Intelligence</span>
             </div>
-            <p className="text-xs text-amber-200/80">{center.competitiveNotes}</p>
+            <p className="text-[11px] sm:text-xs text-amber-200/80">{center.competitiveNotes}</p>
           </div>
         )}
 

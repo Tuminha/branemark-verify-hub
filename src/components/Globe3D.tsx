@@ -98,29 +98,29 @@ export const Globe3D = ({ centers, onCenterClick, selectedCenter }: Globe3DProps
 
   return (
     <div ref={containerRef} className="w-full relative rounded-xl overflow-hidden bg-slate-900/50 border border-slate-700">
-      {/* Legend */}
-      <div className="absolute top-4 left-4 z-10 bg-slate-900/90 backdrop-blur-sm rounded-lg p-3 border border-slate-700">
-        <div className="text-xs text-slate-400 mb-2 font-medium">Nobel Biocare Relationship</div>
-        <div className="space-y-1.5">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-            <span className="text-xs text-slate-300">LEAD (Key Opinion Leader)</span>
+      {/* Legend - Responsive */}
+      <div className="absolute top-2 sm:top-4 left-2 sm:left-4 z-10 bg-slate-900/90 backdrop-blur-sm rounded-lg p-2 sm:p-3 border border-slate-700">
+        <div className="text-[10px] sm:text-xs text-slate-400 mb-1.5 sm:mb-2 font-medium">Nobel Relationship</div>
+        <div className="space-y-1 sm:space-y-1.5">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-purple-500"></div>
+            <span className="text-[10px] sm:text-xs text-slate-300">LEAD</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-            <span className="text-xs text-slate-300">Partner</span>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
+            <span className="text-[10px] sm:text-xs text-slate-300">Partner</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-            <span className="text-xs text-slate-300">User</span>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-blue-500"></div>
+            <span className="text-[10px] sm:text-xs text-slate-300">User</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-            <span className="text-xs text-slate-300">Competitor</span>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
+            <span className="text-[10px] sm:text-xs text-slate-300">Competitor</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-            <span className="text-xs text-slate-300">Unknown</span>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500"></div>
+            <span className="text-[10px] sm:text-xs text-slate-300">Unknown</span>
           </div>
         </div>
       </div>
@@ -150,9 +150,10 @@ export const Globe3D = ({ centers, onCenterClick, selectedCenter }: Globe3DProps
         atmosphereAltitude={0.2}
       />
 
-      {/* Instructions */}
-      <div className="absolute bottom-4 right-4 z-10 text-xs text-slate-500">
-        Drag to rotate | Scroll to zoom | Click point for details
+      {/* Instructions - Hidden on mobile */}
+      <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 z-10 text-[10px] sm:text-xs text-slate-500">
+        <span className="hidden sm:inline">Drag to rotate | Scroll to zoom | Click point for details</span>
+        <span className="sm:hidden">Tap point for details</span>
       </div>
     </div>
   );
