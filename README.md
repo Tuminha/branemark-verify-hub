@@ -1,73 +1,60 @@
-# Welcome to your Lovable project
+# Brånemark Intelligence Hub
 
-## Project info
+**Confidential Intelligence Report for Nobel Biocare**
 
-**URL**: https://lovable.dev/projects/4d9488d7-e42a-44fe-846b-5ea15c9f7211
+Prepared by F4R Foundation for Oral Rehabilitation
 
-## How can I edit this code?
+## Overview
 
-There are several ways of editing your application.
+An executive intelligence dashboard providing comprehensive data on all 20 Brånemark Osseointegration Centers worldwide. Features include:
 
-**Use Lovable**
+- Interactive 3D globe visualization
+- Director profiles and backgrounds
+- Implant brand intelligence (competitive analysis)
+- Nobel Biocare relationship status tracking
+- Confidence indicators for all data points
+- Password-protected access
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4d9488d7-e42a-44fe-846b-5ea15c9f7211) and start prompting.
+## Live Site
 
-Changes made via Lovable will be committed automatically to this repo.
+**URL**: https://tuminha.github.io/branemark-verify-hub/
 
-**Use your preferred IDE**
+**Access Password**: Contact F4R Foundation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Key Intelligence Features
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+| Feature | Description |
+|---------|-------------|
+| **Nobel Relationship Tracking** | Color-coded: LEAD (purple), Partner (green), User (blue), Competitor (red) |
+| **Implant Brand Analysis** | Which brands each center uses (Nobel Biocare vs competitors) |
+| **FOR.org Connections** | Centers linked to Foundation for Oral Rehabilitation |
+| **Confidence Indicators** | Data reliability: Confirmed, Likely, Unconfirmed |
 
-Follow these steps:
+## Technology Stack
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- React 18 + TypeScript
+- Vite (build tool)
+- react-globe.gl (3D visualization)
+- shadcn/ui + Tailwind CSS
+- GitHub Pages (deployment)
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Local Development
 
-# Step 3: Install the necessary dependencies.
-npm i
+```bash
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
-**Edit a file directly in GitHub**
+## Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Automatically deployed to GitHub Pages on push to `main` branch.
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/4d9488d7-e42a-44fe-846b-5ea15c9f7211) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+*Research conducted January 2025 | F4R Foundation for Oral Rehabilitation*
