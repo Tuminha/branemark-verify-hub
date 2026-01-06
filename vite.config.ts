@@ -5,6 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // Base path for GitHub Pages (change 'branemark-verify-hub' to your repo name)
+  base: mode === 'production' ? '/branemark-verify-hub/' : '/',
   server: {
     host: "::",
     port: 8080,
