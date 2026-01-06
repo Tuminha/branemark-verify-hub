@@ -135,14 +135,40 @@ export const IntelligenceDashboard = () => {
                 Confidential Report for Nobel Biocare | Prepared by F4R Foundation
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <Badge variant="outline" className="border-slate-600 text-slate-400">
-                Last Updated: January 2025
-              </Badge>
-              <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 hover:bg-slate-800">
-                <Download className="w-4 h-4 mr-2" />
-                Export
-              </Button>
+
+            {/* Credits Section */}
+            <div className="flex items-center gap-6">
+              <div className="hidden md:flex items-center gap-4">
+                <span className="text-xs text-slate-500">Work done by</span>
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src="/branemark-verify-hub/lovable-uploads/6b459952-000c-4291-b004-b1b9d74cfc7b.png"
+                      alt="Francisco Barbosa"
+                      className="w-8 h-8 rounded-full border-2 border-blue-500"
+                    />
+                    <span className="text-sm text-slate-300">Francisco Barbosa</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src="/branemark-verify-hub/lovable-uploads/911c3a90-0053-449c-95a9-d38672ab6cdd.png"
+                      alt="Pascal Kunz"
+                      className="w-8 h-8 rounded-full border-2 border-purple-500"
+                    />
+                    <span className="text-sm text-slate-300">Pascal Kunz</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Badge variant="outline" className="border-slate-600 text-slate-400 hidden sm:flex">
+                  Last Updated: January 2025
+                </Badge>
+                <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 hover:bg-slate-800">
+                  <Download className="w-4 h-4 mr-2" />
+                  Export
+                </Button>
+              </div>
             </div>
           </div>
         </div>
